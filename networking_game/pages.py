@@ -3,10 +3,15 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 
-
-class MyPage(Page):
+#MyPage is now Information1
+class Information1(Page):
     form_model = 'player'
     form_fields = ['promise']
+
+#WaitPage1 First WaitPage between Information1 and Information2
+class WaitPage1(WaitPage):
+    def after_all_players_arrive(self):
+        pass
 
 class MyPageWaitPage(Page):
     timeout_seconds = 1
@@ -14,11 +19,12 @@ class MyPageWaitPage(Page):
         self.player.cp = random.randint(1,10)
         self.player.endowment = random.randint(50, 500)
 
-class MyPageWaitPage2(WaitPage):
+#WaitPage between Invest and InvestmentReturn
+class WaitPage3(WaitPage):
     def after_all_players_arrive(self):
         pass
 
-class Final_Page(Page):
+class FinalPage(Page):
     def vars_for_template(self):
         player1 = self.group.get_player_by_role('player1')
         player2 = self.group.get_player_by_role('player2')
@@ -65,7 +71,7 @@ class Final_Page(Page):
             'player4_return3': player4.return3
         }
 
-class PrintingResult(Page):
+class Invest(Page):
     def vars_for_template(self):
         player1 = self.group.get_player_by_role('player1')
         player2 = self.group.get_player_by_role('player2')
@@ -97,7 +103,7 @@ class PrintingResult(Page):
     form_model = 'player'
     form_fields = ['investment1', 'investment2', 'investment3', 'investment4']
 
-class investment_return(Page):
+class InvestmentReturn(Page):
 
     form_model = 'player'
     form_fields = ['return1', 'return2', 'return3', 'return4']
@@ -139,16 +145,29 @@ class investment_return(Page):
             'player4_investment3': player4_investment3
         }
 
-class Results(Page):
+#WaitPage between InvestmentReturn and FinalPage
+class WaitPage4(WaitPage):
+    def after_all_players_arrive(self):
+        pass
+
+class Information2(Page):
     pass
+
+#WaitPage between Information2 and Invest
+class WaitPage2(WaitPage):
+    def after_all_players_arrive(self):
+        pass
 
 
 page_sequence = [
     MyPageWaitPage,
-    MyPage,
-    Results,
-    PrintingResult,
-    MyPageWaitPage2,
-    investment_return,
-    Final_Page
+    Information1,
+    WaitPage1,
+    Information2,
+    WaitPage2,
+    Invest,
+    WaitPage3,
+    InvestmentReturn,
+    WaitPage4,
+    FinalPage
 ]
