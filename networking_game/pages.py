@@ -118,7 +118,7 @@ class investment_return(Page):
 
         player3_investment1 = player3.investment1
         player3_investment2 = player3.investment2
-        player3_investment4 = player2.investment4
+        player3_investment4 = player3.investment4
 
         player4_investment1 = player4.investment1
         player4_investment2 = player4.investment2
@@ -133,7 +133,7 @@ class investment_return(Page):
             'player2_investment4': player2_investment4,
             'player3_investment1': player3_investment1, 
             'player3_investment2': player3_investment2,
-            'player3_investment4': player4_investment4,
+            'player3_investment4': player3_investment4,
             'player4_investment1': player4_investment1,
             'player4_investment2': player4_investment2,
             'player4_investment3': player4_investment3
